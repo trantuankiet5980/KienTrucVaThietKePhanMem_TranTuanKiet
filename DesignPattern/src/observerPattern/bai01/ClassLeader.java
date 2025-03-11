@@ -9,12 +9,12 @@ public class ClassLeader implements Subject{
         list = new ArrayList<>();
     }
     @Override
-    public void register(Observer observer) {
+    public void attach(Observer observer) {
         list.add(observer);
     }
 
     @Override
-    public void remove(Observer observer) {
+    public void detach(Observer observer) {
         list.remove(observer);
     }
 

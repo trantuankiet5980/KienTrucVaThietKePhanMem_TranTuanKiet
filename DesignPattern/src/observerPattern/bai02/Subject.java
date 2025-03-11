@@ -1,4 +1,4 @@
-package observerPattern.bai01;
+package observerPattern.bai02;
 
 public interface Subject {
     void attach(Observer observer);
