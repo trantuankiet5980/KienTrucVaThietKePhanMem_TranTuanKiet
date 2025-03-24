@@ -12,6 +12,6 @@ public class OrderContext {
     }
 
     public void process() {
-        order.handleRequet(this);
+        this.order.handleRequet();
     }
 }
