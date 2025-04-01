@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    depends_on:
+      - mysql
+    ports:
+      - "8080:80"  # Ánh xạ cổng 8080 của máy chủ với cổng 80 của container WordPress
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306  # Địa chỉ MySQL container
+      WORDPRESS_DB_NAME: kietdb  # Tên cơ sở dữ liệu WordPress sử dụng
+      WORDPRESS_DB_USER: root  # Tên người dùng MySQL
+      WORDPRESS_DB_PASSWORD: root  # Mật khẩu của người dùng MySQL
+    volumes:
+      - wordpress-data:/var/www/html  # Lưu trữ dữ liệu của WordPress
+    networks:
+      - wordpress-network
+
+  mysql:
+    image: mysql:5.7  # Sử dụng MySQL 5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Mật khẩu root của MySQL
+      MYSQL_DATABASE: kietdb  # Tên cơ sở dữ liệu MySQL sẽ được tạo
+      MYSQL_USER: root  # Tên người dùng MySQL
+      MYSQL_PASSWORD: root  # Mật khẩu của người dùng MySQL
+    volumes:
+      - mysql-data:/var/lib/mysql  # Lưu trữ dữ liệu MySQL
+    networks:
+      - wordpress-network
+
+volumes:
+  wordpress-data:
+  mysql-data:
+
+networks:
+  wordpress-network:
+    driver: bridge
